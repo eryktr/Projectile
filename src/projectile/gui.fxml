@@ -1,0 +1,63 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Pane?>
+<BorderPane fx:controller="projectile.Controller"
+            xmlns:fx="http://javafx.com/fxml"  stylesheets="@style.css" styleClass="window" >
+
+    <top>
+        <HBox alignment="CENTER">
+            <Label styleClass="title" text="Simple projectile simulator" />
+        </HBox>
+    </top>
+
+    <left>
+        <VBox spacing="20">
+            <HBox alignment="TOP_CENTER">
+                <Label fx:id="parameters_label" text="Parameters" />
+            </HBox>
+            <GridPane styleClass="left_parameters" vgap="10" hgap="20">
+                <Label text="Angle" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <Label text="Initial Speed" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Label text="Initial Height" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+
+                <TextField  GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <TextField  GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField  GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <Label text="Draw Path" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                <CheckBox onAction="#changeDrawingMode" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                <Button text="Start Simulation" GridPane.columnIndex="0" GridPane.rowIndex="4" onAction="#startSimulation" />
+
+            </GridPane>
+        </VBox>
+    </left>
+
+    <center>
+
+        <Pane fx:id="drawingPane" >
+           <BorderPane.margin>
+               <Insets top="10" bottom="10" left="10" right="10" />
+           </BorderPane.margin>
+
+        </Pane>
+    </center>
+
+    <bottom>
+
+        <HBox styleClass="bottom_parameters" spacing="10">
+            <Label text="Distance covered:" />
+            <TextField text="" disable="true" />
+            <Label text="Current height: " />
+            <TextField text="" disable="true" />
+        </HBox>
+    </bottom>
+</BorderPane>

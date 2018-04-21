@@ -1,0 +1,49 @@
+.window
+{
+    -fx-padding: 10px;
+}
+.title
+{
+    -fx-font-size: 25px;
+    -fx-font-family: "Arial Black";
+}
+.left_parameters
+{
+    -fx-font-size: 15px;
+    -fx-font-family: "Times New Roman";
+
+}
+
+.left_parameters .text-field
+{
+    -fx-pref-width: 50px;
+}
+
+.bottom_parameters
+{
+
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.bottom_parameters .text-field
+{
+    -fx-border-width: 0.5;
+    -fx-border-color: black;
+    -fx-pref-width: 50px;
+}
+
+#parameters_label
+{
+    -fx-font-size: 20px;
+}
+
+#drawingPane
+{
+    -fx-pref-width: 600;
+    -fx-pref-height: 400;
+    -fx-border-color: black;
+
+
+}
+
