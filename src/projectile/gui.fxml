@@ -28,9 +28,9 @@
                 <Label text="Initial Speed" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                 <Label text="Initial Height" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
 
-                <TextField  GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <TextField  GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField  GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="angle"  GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <TextField fx:id="initialSpeed" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="initialHeight" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
                 <Label text="Draw Path" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
                 <CheckBox onAction="#changeDrawingMode" GridPane.columnIndex="1" GridPane.rowIndex="3" />
@@ -55,9 +55,10 @@
 
         <HBox styleClass="bottom_parameters" spacing="10">
             <Label text="Distance covered:" />
-            <TextField text="" disable="true" />
-            <Label text="Current height: " />
-            <TextField text="" disable="true" />
+            <TextField fx:id="distanceCovered" disable="true" />
+            <Label  text="Current height: " />
+            <TextField fx:id="currentHeight"  disable="true" />
+            <Label text="Eryk Trzeciakiewicz" />
         </HBox>
     </bottom>
 </BorderPane>

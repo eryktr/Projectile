@@ -40,10 +40,8 @@
 
 #drawingPane
 {
-    -fx-pref-width: 600;
+    -fx-pref-width: 800;
     -fx-pref-height: 400;
     -fx-border-color: black;
-
-
 }
 
