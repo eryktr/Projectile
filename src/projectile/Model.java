@@ -3,9 +3,9 @@ package projectile;
 public class Model
 {
     private final double initialHeight, angle, initialSpeed, speedX;
-    private final double ANIMATION_FPS = 60;
+    private final double ANIMATION_FPS = 120;
     private final double dt;
-    private final double gravitationalAcceleration = 10;
+    private final double gravitationalAcceleration = 9.81;
     private double currentDisplacement, currentHeight, speedY;
 
 
@@ -21,16 +21,6 @@ public class Model
     public double getInitialHeight()
     {
         return initialHeight;
-    }
-
-    public double getAngle()
-    {
-        return angle;
-    }
-
-    public double getInitialSpeed()
-    {
-        return initialSpeed;
     }
 
     public double get_dt()

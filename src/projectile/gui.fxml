@@ -36,6 +36,7 @@
                 <CheckBox onAction="#changeDrawingMode" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
                 <Button text="Start Simulation" GridPane.columnIndex="0" GridPane.rowIndex="4" onAction="#startSimulation" />
+                <Button text="Clear" GridPane.columnIndex="0" GridPane.rowIndex="5" onAction="#clear" />
 
             </GridPane>
         </VBox>

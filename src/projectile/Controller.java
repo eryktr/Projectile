@@ -1,11 +1,10 @@
 package projectile;
 
 import javafx.animation.AnimationTimer;
-import javafx.beans.property.StringProperty;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class Controller
@@ -16,6 +15,7 @@ public class Controller
     @FXML
     private TextField angle, initialSpeed, initialHeight, distanceCovered, currentHeight;
     private Circle object;
+    private boolean drawPath;
     private class Timer extends AnimationTimer
     {
 
@@ -29,22 +29,17 @@ public class Controller
                     model.update();
                     updateAnimation();
                     if(model.getCurrentHeight() > 400)
+                    {
                         this.stop();
+                    }
                 }
-                catch (InterruptedException ex)
-                {
-
-                }
+                catch (InterruptedException ex) { }
             }
-        }
-
-
-    public void init()
-    {
     }
 
     public void changeDrawingMode()
     {
+        drawPath = !drawPath;
 
     }
 
@@ -65,6 +60,11 @@ public class Controller
 
     }
 
+    public void clear()
+    {
+        drawingPane.getChildren().clear();
+    }
+
     public void updateAnimation()
     {
         object.setCenterX(model.getCurrentDisplacement());
@@ -72,9 +72,16 @@ public class Controller
         int distInfo = (int)model.getCurrentDisplacement();
         String text1 = Integer.toString(distInfo);
         distanceCovered.setText(text1);
-        //currentHeight.setText(Integer.toString((int)model.getCurrentHeight()));
+        currentHeight.setText(Integer.toString((int)(401 - model.getCurrentHeight())));
+        if(400 - model.getCurrentHeight() < 0)
+        {
+            currentHeight.setText("0");
+        }
+
+        if(drawPath)
+        {
+            Circle point = new Circle(model.getCurrentDisplacement(), model.getCurrentHeight(), 1, Color.RED);
+            drawingPane.getChildren().add(point);
+        }
     }
-
-
-
 }
