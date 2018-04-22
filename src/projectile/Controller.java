@@ -7,6 +7,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+import java.util.Random;
+
 public class Controller
 {
     private Model model;
@@ -16,6 +18,7 @@ public class Controller
     private TextField angle, initialSpeed, initialHeight, distanceCovered, currentHeight;
     private Circle object;
     private boolean drawPath;
+    private Color pathColor;
     private class Timer extends AnimationTimer
     {
 
@@ -28,7 +31,7 @@ public class Controller
                     wait((long) (1000 * dt));
                     model.update();
                     updateAnimation();
-                    if(model.getCurrentHeight() > 400)
+                    if(object.getCenterY() > 400)
                     {
                         this.stop();
                     }
@@ -46,11 +49,12 @@ public class Controller
     public void startSimulation()
     {
 
+        pathColor = getRandomColor();
         double initSpeed = Double.parseDouble(initialSpeed.getText());
         double initHeight = Double.parseDouble(initialHeight.getText());
         double initAngle = Double.parseDouble(angle.getText());
         model = new Model(400 - initHeight, initAngle, initSpeed);
-        Circle object = new Circle(0, model.getInitialHeight(), 5);
+        Circle object = new Circle(0, model.getInitialHeight(), 3);
         drawingPane.getChildren().add(object);
         this.object = object;
         Timer timer = new Timer();
@@ -80,8 +84,17 @@ public class Controller
 
         if(drawPath)
         {
-            Circle point = new Circle(model.getCurrentDisplacement(), model.getCurrentHeight(), 1, Color.RED);
+            Circle point = new Circle(model.getCurrentDisplacement(), model.getCurrentHeight(), 1, pathColor);
             drawingPane.getChildren().add(point);
         }
+    }
+
+    public Color getRandomColor()
+    {
+        Random random = new Random();
+        int red = random.nextInt(255);
+        int green = random.nextInt(255);
+        int blue = random.nextInt(255);
+        return Color.rgb(red, green, blue);
     }
 }
