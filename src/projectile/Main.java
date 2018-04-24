@@ -17,5 +17,6 @@ public class Main extends Application
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
         primaryStage.setResizable(false);
+        primaryStage.setTitle("Projectile Motion");
     }
 }

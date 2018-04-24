@@ -2,11 +2,11 @@ package projectile;
 
 public class Model
 {
-    private final double initialHeight, angle, initialSpeed, speedX;
-    private final double ANIMATION_FPS = 120;
-    private final double dt;
+    private final double initialHeight, angle, initialSpeed, dragCoefficient, mass;
+    private final double ANIMATION_FPS = 50;
+    private final double dt = 1/ANIMATION_FPS;
     private final double gravitationalAcceleration = 9.81;
-    private double currentDisplacement, currentHeight, speedY;
+    private double currentDisplacement, currentHeight, speedY, speedX;
 
 
     public double getCurrentDisplacement()
@@ -30,21 +30,29 @@ public class Model
 
     public void update()
     {
-        currentDisplacement = currentDisplacement + speedX * dt;
+        double accelerationX, accelerationY;
         currentHeight = currentHeight + speedY * dt;
-        speedY = speedY + gravitationalAcceleration * dt;
+        currentDisplacement = currentDisplacement + speedX * dt;
+        accelerationX = (-dragCoefficient / mass) * speedX * speedX;
+        accelerationY = Math.signum(-speedY) * (dragCoefficient/mass) * speedY * speedY;
+        speedY = speedY + gravitationalAcceleration * dt + accelerationY * dt;
+        speedX = speedX + accelerationX * dt;
+
+
+
     }
 
-    public Model(double initialHeight, double angle, double initialSpeed)
+    public Model(double initialHeight, double angle, double initialSpeed, double dragCoefficient, double mass)
     {
         this.initialHeight = initialHeight;
         this.angle = angle;
         this.initialSpeed = initialSpeed;
         this.speedX = initialSpeed * Math.cos(angle*3.14/180);
         this.speedY = -initialSpeed * Math.sin(angle*3.14/180);
-        this.dt = (1/ANIMATION_FPS);
         this.currentHeight = initialHeight;
         this.currentDisplacement = 0;
+        this.dragCoefficient = dragCoefficient;
+        this.mass = mass;
 
     }
 

@@ -2,6 +2,7 @@ package projectile;
 
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -15,10 +16,13 @@ public class Controller
     @FXML
     private Pane drawingPane;
     @FXML
-    private TextField angle, initialSpeed, initialHeight, distanceCovered, currentHeight;
+    private TextField angle, initialSpeed, initialHeight, distanceCovered, currentHeight, timeField, dragCoefficient, mass;
+    @FXML
+    private Button clearBtn;
     private Circle object;
     private boolean drawPath;
     private Color pathColor;
+    private double time;
     private class Timer extends AnimationTimer
     {
 
@@ -43,25 +47,24 @@ public class Controller
     public void changeDrawingMode()
     {
         drawPath = !drawPath;
-
     }
 
     public void startSimulation()
     {
-
+        time = 0;
         pathColor = getRandomColor();
-        double initSpeed = Double.parseDouble(initialSpeed.getText());
-        double initHeight = Double.parseDouble(initialHeight.getText());
-        double initAngle = Double.parseDouble(angle.getText());
-        model = new Model(400 - initHeight, initAngle, initSpeed);
+        double initSpeed = Utility.getValue(initialSpeed);
+        double initHeight = Utility.getValue(initialHeight);
+        double initAngle = Utility.getValue(angle);
+        double dragCoeff = Utility.getValue(dragCoefficient);
+        double mass = Utility.getValue(this.mass);
+        model = new Model(400 - initHeight, initAngle, initSpeed, dragCoeff, mass);
         Circle object = new Circle(0, model.getInitialHeight(), 3);
         drawingPane.getChildren().add(object);
         this.object = object;
+        clearBtn.setDisable(true);
         Timer timer = new Timer();
         timer.start();
-
-
-
     }
 
     public void clear()
@@ -71,15 +74,19 @@ public class Controller
 
     public void updateAnimation()
     {
+        time += model.get_dt();
         object.setCenterX(model.getCurrentDisplacement());
         object.setCenterY(model.getCurrentHeight());
         int distInfo = (int)model.getCurrentDisplacement();
         String text1 = Integer.toString(distInfo);
         distanceCovered.setText(text1);
         currentHeight.setText(Integer.toString((int)(401 - model.getCurrentHeight())));
+        timeField.setText(Double.toString((double)Math.round(100*time)/100));
+
         if(400 - model.getCurrentHeight() < 0)
         {
             currentHeight.setText("0");
+            clearBtn.setDisable(false);
         }
 
         if(drawPath)
@@ -87,6 +94,7 @@ public class Controller
             Circle point = new Circle(model.getCurrentDisplacement(), model.getCurrentHeight(), 1, pathColor);
             drawingPane.getChildren().add(point);
         }
+
     }
 
     public Color getRandomColor()

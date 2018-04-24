@@ -30,7 +30,7 @@
 {
     -fx-border-width: 0.5;
     -fx-border-color: black;
-    -fx-pref-width: 50px;
+    -fx-pref-width: 80px;
 }
 
 #parameters_label
